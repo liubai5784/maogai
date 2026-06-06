@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+</head>
+<body>
+    <h1>测试 questions.js 加载</h1>
+    <div id="result"></div>
+
+    <script src="questions.js?v=3"></script>
+    <script>
+        try {
+            if (typeof questionsData !== 'undefined') {
+                document.getElementById('result').innerHTML =
+                    '<p style="color: green;">questions.js 加载成功!</p>' +
+                    '<p>题目总数: ' + questionsData.length + '</p>' +
+                    '<p>前3道题:</p><ul>' +
+                    questionsData.slice(0, 3).map(q => '<li>' + q.chapter + ': ' + q.question.substring(0, 30) + '...</li>').join('') +
+                    '</ul>';
+            } else {
+                document.getElementById('result').innerHTML = '<p style="color: red;">questionsData 未定义!</p>';
+            }
+        } catch (e) {
+            document.getElementById('result').innerHTML = '<p style="color: red;">错误: ' + e.message + '</p>';
+            console.error(e);
+        }
+    </script>
+</body>
+</html>
